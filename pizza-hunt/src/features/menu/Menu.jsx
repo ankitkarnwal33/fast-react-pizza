@@ -5,7 +5,7 @@ import { useLoaderData } from "react-router-dom";
 function Menu() {
   const menu = useLoaderData();
   return (
-    <ul>
+    <ul className="space-y divide-y divide-stone-200 px-5">
       {menu.map((pizza) => (
         <MenuItem pizza={pizza} key={pizza.id} />
       ))}
