@@ -1,5 +1,8 @@
-import Button from "../../ui/Button";
-import { formatCurrency } from "../../utility/helpers";
+import { useDispatch, useSelector } from 'react-redux';
+import { formatCurrency } from '../../utility/helpers';
+import { getTotalCartQuantityById } from './cartSlice';
+import UpdateCartQuantity from '../../ui/UpdateCartQuantity';
+import ButtonDelete from '../../ui/ButtonDelete';
 
 function CartItem({ item }) {
   const { pizzaId, name, quantity, totalPrice } = item;
@@ -9,9 +12,12 @@ function CartItem({ item }) {
       <p className="mb-1 sm:mb-0">
         {quantity}&times; {name}
       </p>
-      <div className="flex items-center justify-between sm:gap-8">
+      <div className="flex items-center justify-between sm:gap-4">
         <p className="text-sm font-semibold">{formatCurrency(totalPrice)}</p>
-        <Button type={"small"}>Delete</Button>
+
+        <UpdateCartQuantity pizzaId={pizzaId} quantity={quantity} />
+
+        <ButtonDelete pizzaId={pizzaId} />
       </div>
     </li>
   );

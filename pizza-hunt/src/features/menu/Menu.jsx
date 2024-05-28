@@ -1,6 +1,7 @@
-import { getMenu } from "../../services/apiRestaurant";
-import MenuItem from "./MenuItem";
-import { useLoaderData } from "react-router-dom";
+import { useSelector } from 'react-redux';
+import { getMenu } from '../../services/apiRestaurant';
+import MenuItem from './MenuItem';
+import { useLoaderData } from 'react-router-dom';
 
 function Menu() {
   const menu = useLoaderData();
