@@ -1,4 +1,4 @@
-import { formatCurrency } from "../../utility/helpers";
+import { formatCurrency } from '../../utility/helpers';
 
 function OrderItem({ item, isLoadingIngredients, ingredients }) {
   const { quantity, name, totalPrice } = item;
@@ -11,6 +11,9 @@ function OrderItem({ item, isLoadingIngredients, ingredients }) {
         </p>
         <p className=" font-bold">{formatCurrency(totalPrice)}</p>
       </div>
+      <span className=" p-2 px-5 text-sm">
+        {isLoadingIngredients ? `Loading...` : `${ingredients}`}
+      </span>
     </li>
   );
 }
