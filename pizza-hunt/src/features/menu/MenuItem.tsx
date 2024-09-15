@@ -4,8 +4,10 @@ import { formatCurrency } from '../../utility/helpers';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem, getTotalCartQuantityById } from '../cart/cartSlice';
 import ButtonDelete from '../../ui/ButtonDelete';
+import React from 'react';
+import { Menu } from '../../services/apiRestaurant';
 
-function MenuItem({ pizza }) {
+function MenuItem({ pizza }: { pizza: Menu }) {
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
   const currentQuantity = useSelector(getTotalCartQuantityById(id));
   const isInCart = currentQuantity > 0;
@@ -52,7 +54,12 @@ function MenuItem({ pizza }) {
           )}
           {!soldOut && !isInCart && (
             <>
-              <Button type={'small'} onClick={handleAddToCart}>
+              <Button
+                type={'small'}
+                onClick={handleAddToCart}
+                disabled={false}
+                to={''}
+              >
                 Add to cart
               </Button>
             </>

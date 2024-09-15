@@ -1,6 +1,36 @@
-const API_URL = 'https://react-fast-pizza-api.onrender.com/api';
+const API_URL: string = 'https://react-fast-pizza-api.onrender.com/api';
 
-export async function getMenu() {
+export interface Menu {
+  id: string;
+  imageUrl: string;
+  ingredients: string[];
+  name: string;
+  soldOut: boolean;
+  unitPrice: number;
+}
+
+export interface CartItem {
+  addIngredients: string[];
+  name: string;
+  pizzaId: string;
+  quantity: number;
+  removeIngredients: string[];
+  totalPrice: number;
+  unitPrice: number;
+}
+
+export interface OrderStatus {
+  cart: CartItem[];
+  customer: string;
+  estimatedDelivery: string;
+  id: string;
+  orderPrice: number;
+  priority: boolean;
+  priorityPrice: number;
+  status: string;
+}
+
+export async function getMenu(): Promise<Menu | never> {
   const res = await fetch(`${API_URL}/menu`);
 
   // fetch won't throw error on 400 errors (e.g. when URL is wrong), so we need to do it manually. This will then go into the catch block, where the message is set
@@ -10,10 +40,9 @@ export async function getMenu() {
   return data;
 }
 
-export async function getOrder(id) {
+export async function getOrder(id: string): Promise<OrderStatus> {
   const res = await fetch(`${API_URL}/order/${id}`);
   if (!res.ok) throw Error(`Couldn't find order #${id}`);
-
   const { data } = await res.json();
   return data;
 }
@@ -30,13 +59,14 @@ export async function createOrder(newOrder) {
 
     if (!res.ok) throw Error();
     const { data } = await res.json();
+    console.log(data);
     return data;
   } catch {
     throw Error('Failed creating your order');
   }
 }
 
-export async function updateOrder(id, updateObj) {
+export async function updateOrder(id: string, updateObj): Promise<any> {
   try {
     const res = await fetch(`${API_URL}/order/${id}`, {
       method: 'PATCH',

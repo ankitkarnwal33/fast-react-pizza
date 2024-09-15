@@ -59,7 +59,7 @@ const userSlice = createSlice({
   }
 })
 
-export const fetchUserAddress = createAsyncThunk("user/fetchAddress", async function () {
+export const fetchUserAddress = createAsyncThunk("user/fetchAddress", async function (): any {
   // 1) We get the user's geolocation position
   const positionObj = await getPosition();
   const position = {

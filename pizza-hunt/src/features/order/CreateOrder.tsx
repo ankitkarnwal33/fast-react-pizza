@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { clearCart, getTotalCartPrice } from '../cart/cartSlice';
 import { formatCurrency } from '../../utility/helpers';
 import { fetchUserAddress } from '../users/userSlice';
+import React from 'react';
 
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str) =>
@@ -17,18 +18,18 @@ const isValidPhone = (str) =>
 
 function CreateOrder() {
   const navigation = useNavigation();
-  const [withPriority, setWithPriority] = useState(false);
-  const isSubmitting = navigation.state === 'submitting'; // 'idle' || 'loading' || 'submitting'
+  const [withPriority, setWithPriority] = useState<boolean>(false);
+  const isSubmitting: boolean = navigation.state === 'submitting'; // 'idle' || 'loading' || 'submitting'
   const dispatch = useDispatch();
-  const formErrors = useActionData();
-  const cart = useSelector((state) => state.cart.cart);
+  const formErrors: any = useActionData();
+  const cart = useSelector((state: any) => state.cart.cart);
   const {
     username,
     position,
     address,
     error: addressError,
     status: addressStatus,
-  } = useSelector((store) => store.user);
+  } = useSelector((store: any) => store.user);
   const isLoadingAddress = addressStatus === 'loading';
   const totalPrice = useSelector(getTotalCartPrice);
   const priorityPrice = withPriority ? 0.2 * totalPrice : 0;
@@ -75,6 +76,7 @@ function CreateOrder() {
                   dispatch(fetchUserAddress());
                 }}
                 disabled={isLoadingAddress}
+                to={''}
               >
                 Get address
               </Button>

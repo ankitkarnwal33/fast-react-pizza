@@ -1,10 +1,11 @@
+import React, { FormEvent } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function SearchOrder() {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState<string>('');
   const navigate = useNavigate();
-  function handleSubmit(event) {
+  function handleSubmit(event: FormEvent) {
     event.preventDefault();
     if (!query) return;
     navigate(`/order/${query}`);

@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux';
 import CreateUser from '../features/users/CreateUser';
 import Button from './Button';
+import React from 'react';
 
 function Home() {
-  const username = useSelector((store) => store.user.username);
+  const username: string = useSelector((store: any) => store.user.username);
   return (
     <div className="my-10 px-4 text-center">
       <h1 className="mb-8 text-xl font-semibold md:text-3xl ">
@@ -16,8 +17,14 @@ function Home() {
       {username === '' ? (
         <CreateUser />
       ) : (
-        <Button type={'primary'} to={'/menu'}>
-          {' '}
+        <Button
+          type={'primary'}
+          to={'/menu'}
+          disabled={false}
+          onClick={function (e: React.FormEvent): void {
+            throw new Error('Function not implemented.');
+          }}
+        >
           Start ordering, {username}
         </Button>
       )}

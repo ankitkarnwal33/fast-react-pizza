@@ -4,13 +4,14 @@ import CartItem from './CartItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearCart, getCart } from './cartSlice';
 import EmptyCart from './EmptyCart';
+import React, { FormEvent } from 'react';
 
 function Cart() {
-  const username = useSelector((store) => store.user.username);
+  const username = useSelector((store: any) => store.user.username);
   const cart = useSelector(getCart);
   const dispath = useDispatch();
   if (cart.length === 0) return <EmptyCart />;
-  function hanleClearCart(e) {
+  function hanleClearCart(e: FormEvent) {
     e.preventDefault();
     dispath(clearCart());
   }
@@ -25,11 +26,23 @@ function Cart() {
         ))}
       </ul>
       <div className=" mt-5 space-x-3">
-        <Button to="/order/new" type={'small'}>
+        <Button
+          to="/order/new"
+          type={'small'}
+          disabled={false}
+          onClick={function (e: React.FormEvent): void {
+            throw new Error('Function not implemented.');
+          }}
+        >
           {' '}
           Order pizzas
         </Button>
-        <Button type={'secondry'} onClick={hanleClearCart}>
+        <Button
+          type={'secondry'}
+          onClick={hanleClearCart}
+          disabled={false}
+          to={''}
+        >
           Clear cart
         </Button>
       </div>

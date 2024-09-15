@@ -1,12 +1,13 @@
-import { Outlet } from "react-router-dom";
-import { useNavigation } from "react-router-dom";
-import CartOverview from "../features/cart/CartOverview";
-import Header from "./Header";
-import Spinner from "./Spinner";
+import { Outlet } from 'react-router-dom';
+import { useNavigation } from 'react-router-dom';
+import CartOverview from '../features/cart/CartOverview';
+import Header from './Header';
+import Spinner from './Spinner';
+import React from 'react';
 
 function AppLayout() {
   const navigation = useNavigation();
-  const isLoading = navigation.state === "loading";
+  const isLoading: boolean = navigation.state === 'loading';
 
   return (
     <div className="grid h-screen grid-rows-[auto_1fr_auto]">

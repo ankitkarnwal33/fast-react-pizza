@@ -1,7 +1,12 @@
 // Test ID: IIDSAT
 import { useFetcher, useLoaderData } from 'react-router-dom';
-import { getOrder } from '../../services/apiRestaurant';
-import OrderItem from '../order/OrderItem';
+import {
+  CartItem,
+  getOrder,
+  Menu,
+  OrderStatus,
+} from '../../services/apiRestaurant';
+import OrderItem from './OrderItem';
 import { useEffect } from 'react';
 import {
   calcMinutesLeft,
@@ -9,17 +14,18 @@ import {
   formatDate,
 } from '../../utility/helpers';
 import UpdateOrder from './UpdateOrder';
+import React from 'react';
 
 function Order() {
   // Everyone can search for all orders, so for privacy reasons we're gonna exclude names or address, these are only for the restaurant staff
-  const order = useLoaderData();
+  const order: any = useLoaderData();
   const fetcher = useFetcher();
   useEffect(() => {
     if (!fetcher.data && fetcher.state === 'idle') {
       fetcher.load('/menu');
     }
   }, [fetcher]);
-  const isLoadingIngredients = fetcher.state === 'loading';
+  const isLoadingIngredients: boolean = fetcher.state === 'loading';
   const {
     id,
     status,
@@ -28,7 +34,7 @@ function Order() {
     orderPrice,
     estimatedDelivery,
     cart,
-  } = order;
+  }: OrderStatus = order;
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
 
   return (
@@ -60,13 +66,13 @@ function Order() {
       </div>
 
       <ul className=" divide-y divide-stone-200 border-b border-t">
-        {cart.map((item) => (
+        {cart.map((item: any) => (
           <OrderItem
             item={item}
             key={item.pizzaId}
             isLoadingIngredients={isLoadingIngredients}
             ingredients={fetcher.data
-              ?.find((el) => el.pizzaId === item.id)
+              ?.find((el: CartItem): boolean => el.pizzaId === item.id)
               ?.ingredients.join(', ')}
           />
         ))}

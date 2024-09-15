@@ -3,8 +3,10 @@ import { formatCurrency } from '../../utility/helpers';
 import { getTotalCartQuantityById } from './cartSlice';
 import UpdateCartQuantity from '../../ui/UpdateCartQuantity';
 import ButtonDelete from '../../ui/ButtonDelete';
+import React from 'react';
+import { CartItem } from '../../services/apiRestaurant';
 
-function CartItem({ item }) {
+function CartItem({ item }: { item: CartItem }) {
   const { pizzaId, name, quantity, totalPrice } = item;
 
   return (

@@ -1,3 +1,5 @@
+import React from 'react';
+import { OrderStatus } from '../../services/apiRestaurant';
 import { formatCurrency } from '../../utility/helpers';
 
 function OrderItem({ item, isLoadingIngredients, ingredients }) {

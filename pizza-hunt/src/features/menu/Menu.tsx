@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux';
-import { getMenu } from '../../services/apiRestaurant';
+import { getMenu, Menu } from '../../services/apiRestaurant';
 import MenuItem from './MenuItem';
 import { useLoaderData } from 'react-router-dom';
+import React from 'react';
 
 function Menu() {
-  const menu = useLoaderData();
+  const menu: Menu[] = useLoaderData();
   return (
     <ul className="space-y divide-y divide-stone-200 px-5">
       {menu.map((pizza) => (
